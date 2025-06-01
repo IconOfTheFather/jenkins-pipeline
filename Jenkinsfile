@@ -1,5 +1,13 @@
 pipeline {
     agent any
+
+    eviroment{
+     AWS_REGION = 'us-east-1'
+     ECR_REPO = '590184023519.dkr.ecr.us-east-1.amazonaws.com/devops'
+     IMAGE_TAG = '590184023519.dkr.ecr.us-east-1.amazonaws.com'
+
+    }
+
     stages{
         stage('CodeScan'){
             steps{
@@ -11,9 +19,9 @@ pipeline {
         }
     stage('dockerLogin'){
         steps{
-            sh 'aws ecr get-login-password --region us-east-1 |\
+            sh "aws ecr get-login-password --region $AWS_REGION |\
              docker login --username AWS \
-              --password-stdin 590184023519.dkr.ecr.us-east-1.amazonaws.com'
+              --password-stdin $ECR_REGION"
         }
     }    
     stage('dockerImageBuild') {
@@ -24,16 +32,16 @@ pipeline {
 }
     stage('dockerImageTag'){
         steps{
-            sh 'docker tag devops:latest\
-             590184023519.dkr.ecr.us-east-1.amazonaws.com/devops:latest'
-            sh 'docker tag imageversion \
-             590184023519.dkr.ecr.us-east-1.amazonaws.com/devops:v1.$BUILD_NUMBER'
+            sh "docker tag devops:latest\
+             $ECR_REPO:latest"
+            sh "docker tag imageversion \
+             $ECR_REPO:v1.$BUILD_NUMBER"
         }
     }
     stage('pushImage'){
         steps{
-            sh 'docker push 590184023519.dkr.ecr.us-east-1.amazonaws.com/devops:latest'
-            sh 'docker push 590184023519.dkr.ecr.us-east-1.amazonaws.com/devops:v1.$BUILD_NUMBER'
+            sh "$ECR_REPO:latest"
+            sh "$ECR_REPO:v1.$BUILD_NUMBER"
         }
     }      
     }
