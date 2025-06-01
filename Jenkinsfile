@@ -27,7 +27,7 @@ pipeline {
             sh 'docker tag devops:latest\
              590184023519.dkr.ecr.us-east-1.amazonaws.com/devops:latest'
             sh 'docker tag imageversion \
-             590184023519.dkr.ecr.us-east-1.amazonaws.comdevops:v1.$BUILD_NUMBER'
+             590184023519.dkr.ecr.us-east-1.amazonaws.com/devops:v1.$BUILD_NUMBER'
         }
     }
     stage('pushImage'){
