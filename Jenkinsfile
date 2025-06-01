@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    eviroment{
+    evironment{
      AWS_REGION = 'us-east-1'
      ECR_REPO = '590184023519.dkr.ecr.us-east-1.amazonaws.com/devops'
      IMAGE_TAG = '590184023519.dkr.ecr.us-east-1.amazonaws.com'
