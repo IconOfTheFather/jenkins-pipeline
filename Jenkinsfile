@@ -6,6 +6,7 @@ pipeline {
                 sh 'echo "clone"'
                 sh 'uname -r'
                 sh 'nproc'
+                sh 'pwd'
 
             }
         }
