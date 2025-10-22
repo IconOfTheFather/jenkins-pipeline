@@ -17,10 +17,11 @@ pipeline{
                 sh 'docker build -t jenkins-ci .'
             }
         }
-        stage('dockerImageTag')
+        stage('dockerImageTag'){
             steps{
                 sh 'docker tag jenkins-ci:latest 676085824947.dkr.ecr.us-east-1.amazonaws.com/jenkins-ci:latest'
                 }
+        }
         stage('pushImage'){
             steps{
                 sh 'docker push 676085824947.dkr.ecr.us-east-1.amazonaws.com/jenkins-ci:latest'
