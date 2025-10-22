@@ -4,9 +4,7 @@ pipeline{
         stage('CodeScan'){
             steps{
                 sh 'trivy fs . -o result.html'
-                sh 'cat result.html'
-                
-                
+                sh 'cat result.html'   
             }
         }
         stage('dockerLogin'){
@@ -21,10 +19,8 @@ pipeline{
         }
         stage('dockerImageTag')
             steps{
-                steps{
-                    sh 'docker tag jenkins-ci:latest 676085824947.dkr.ecr.us-east-1.amazonaws.com/jenkins-ci:latest'
+                sh 'docker tag jenkins-ci:latest 676085824947.dkr.ecr.us-east-1.amazonaws.com/jenkins-ci:latest'
                 }
-            }
         stage('pushImage'){
             steps{
                 sh 'docker push 676085824947.dkr.ecr.us-east-1.amazonaws.com/jenkins-ci:latest'
